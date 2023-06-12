@@ -6,11 +6,12 @@ import IconButton from '@mui/material/IconButton';
 import Logo from '../../assets/images/logo.svg'
 import Back from '../../assets/images/back.svg'
 import history from "../../utils/history";
+import "../../assets/css/home/App.scss";
 
 const NavBar: React.FC = (): ReactElement => {
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="transparent" elevation={0}>
+            <AppBar className="nav-border" position="static" color="transparent" elevation={0}  >
                 <Toolbar>
                     {history.location.pathname !== '/' ? <IconButton
                         size="large"

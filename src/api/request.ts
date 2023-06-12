@@ -1,7 +1,7 @@
 import axios, { Method, AxiosResponse } from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_HOST_BACKEND,
+  baseURL: 'https://rickandmortyapi.com',
 });
 
 const request = <T>(

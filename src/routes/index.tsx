@@ -4,15 +4,15 @@ import Layout from "../layout/layout";
 import history from "../utils/history";
 
 const Home = lazy(() => import("../views/home/App"));
+const Location = lazy(() => import("../views/location/Location"));
 
 const IndexRouter: React.FC = (): ReactElement => {
   return (
     <Layout>
       <Router history={history}>
         <Suspense fallback={<p>Loading...</p>}>
-
           <Route path="/" component={Home} />
-
+          <Route path="/location" component={Location} />
         </Suspense>
       </Router>
     </Layout>

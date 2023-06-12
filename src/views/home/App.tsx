@@ -1,31 +1,39 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import Card from "../../components/home/Card";
-import request from "../../api/request"
 import "../../assets/css/home/App.scss"
 import Paginating from "../../components/home/Paginator";
+import { useGetLocationsQuery } from "../../store/services/locations"
+import Skeleton from '@mui/material/Skeleton';
 
 const Home: React.FC = (): ReactElement => {
-  const [records, setRecord] = useState<any[]>([])
-  const [metaData, setMetaData] = useState<any>(null)
-
-  useEffect(() => {
-    (async function fetchLocations() {
-      let response: any = await request('GET', '/api/location', {})
-      console.log(response)
-      setRecord(response?.data?.results || [])
-      setMetaData(response?.data?.info)
-    })();
-  }, [])
+  const [currentPage, setCurrentPage] = useState<any>(1)
+  const {
+    data,
+    isLoading,
+    // isSuccess,
+    // isError,
+    // error,
+  } = useGetLocationsQuery(currentPage)
 
   function onChangeHandler(event: React.ChangeEvent<unknown>, page: number): void {
-    console.log("Hum tumhhare hain sanam", event, page)
-    request('GET', `/api/location?page=${page}`, {}).then(res => console.log(res.data)).catch(e => console.log(e))
+    setCurrentPage(page)
+  }
+  if (isLoading) {
+    return <div className="card-section">
+      {new Array(20).fill(0).map(() => <Skeleton variant="rectangular" width={420} height={130} />)}
+    </div>
   }
   return <>
     <section className="card-section">
-      {records && records.map((row: any) => (<div className="card-align"
+      <>{data && data.results.map((row: any) => (<div className="card-align"
         key={row.id}><Card data={row} /></div>))}
-      {metaData && <Paginating count={Math.ceil(metaData.count / 20)} onChangeHandler={onChangeHandler} />}
+      </>
+      <>
+
+      </>
+    </section>
+    <section className="card-section">
+      {data && <Paginating count={Math.ceil(data.info.count / 20)} onChangeHandler={onChangeHandler} />}
     </section>
   </>;
 };

@@ -3,10 +3,14 @@ import ReactDOM from "react-dom";
 import "./assets/css/base/index.scss";
 import App from "./routes/index";
 import * as serviceWorker from "./serviceWorker";
+import { ApiProvider } from '@reduxjs/toolkit/dist/query/react'
+import { api } from './store/services/locations'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApiProvider api={api}>
+      <App />
+    </ApiProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -1,8 +1,10 @@
 import React, { ReactElement } from "react";
-import App from "../../components/home/App";
+import Card from "../../components/home/Card";
 
 const Home: React.FC = (): ReactElement => {
-  return <App />;
+  return <>
+    <Card />
+  </>;
 };
 
 export default Home;

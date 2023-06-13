@@ -25,16 +25,15 @@ const Home: React.FC = (): ReactElement => {
   }
   return <>
     <section className="card-section">
-      <>{data && data.results.map((row: any) => (<div className="card-align"
-        key={row.id}><Card data={row} /></div>))}
-      </>
-      <>
+      <div className="cards">
+        {data && data.results.map((row: any) => (<div className="card-align"
+          key={row.id}><Card data={row} /></div>))}
+      </div>
+      <div className="pagination">
+        {data && <Paginating count={Math.ceil(data.info.count / 20)} onChangeHandler={onChangeHandler} />}
+      </div>
+    </section>
 
-      </>
-    </section>
-    <section className="card-section">
-      {data && <Paginating count={Math.ceil(data.info.count / 20)} onChangeHandler={onChangeHandler} />}
-    </section>
   </>;
 };
 

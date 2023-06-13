@@ -3,10 +3,18 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com' }),
-    tagTypes: ['Post'],
+    tagTypes: [],
     endpoints: (build) => ({
         getLocations: build.query({
             query: (page: any) => `/api/location?page=${page}`
+        }),
+        getSpecificLocation: build.query({
+            query: (id: any) => `/api/location/${id}`
+        }),
+        getCharacters: build.query({
+            query: (apis) => {
+                return apis.map((api: string) => api)
+            }
         }),
         // addPost: build.mutation<Post, Partial<Post>>({
         //     query: (body) => ({
@@ -21,5 +29,5 @@ export const api = createApi({
 })
 
 export const {
-    useGetLocationsQuery,
+    useGetLocationsQuery, useGetCharactersQuery, useGetSpecificLocationQuery
 } = api

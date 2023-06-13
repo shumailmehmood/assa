@@ -11,8 +11,8 @@ const IndexRouter: React.FC = (): ReactElement => {
     <Layout>
       <Router history={history}>
         <Suspense fallback={<p>Loading...</p>}>
-          <Route path="/" component={Home} />
-          <Route path="/location" component={Location} />
+          <Route path="/" exact component={Home} />
+          <Route path="/location" exact component={Location} />
         </Suspense>
       </Router>
     </Layout>

@@ -11,9 +11,17 @@
   height: 130px;
   left: 0px;
   background: #EFE04B;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   border-radius: 15px;
+  transition: all 0.5s;
 }
 
+.card:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}
 
 .card-content {
   position: absolute;
@@ -104,5 +112,10 @@
         }
       }
     }
+  }
+
+  .pagination {
+    position: relative;
+    top: 68px;
   }
 }

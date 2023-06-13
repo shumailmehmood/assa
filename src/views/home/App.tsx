@@ -4,9 +4,11 @@ import "../../assets/css/home/App.scss";
 import Paginating from "../../components/home/Paginator";
 import { useGetLocationsQuery } from "../../store/services/locations";
 import Skeleton from "@mui/material/Skeleton";
+import { useNavigate } from 'react-router-dom'
 
 const Home: React.FC = (): ReactElement => {
   const [currentPage, setCurrentPage] = useState<any>(1);
+  const navigate = useNavigate();
   const {
     data: locations,
     isLoading,
@@ -22,8 +24,8 @@ const Home: React.FC = (): ReactElement => {
     setCurrentPage(page);
   }
 
-  function onRouteChange() {
-    // locate("/location");
+  function onRouteChange(id: number): void {
+    navigate(`/location?id=${id}`);
   }
 
   if (isLoading) {
@@ -41,7 +43,7 @@ const Home: React.FC = (): ReactElement => {
         <div className="cards">
           {locations &&
             locations.results.map((row: any) => (
-              <div className="card-align" key={row.id}>
+              <div className="card-align" key={row.id} onClick={() => onRouteChange(row.id)}>
                 <Card data={row} />
               </div>
             ))}

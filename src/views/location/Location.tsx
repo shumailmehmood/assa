@@ -1,39 +1,71 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import Card from "../../components/home/Card";
+import React, { ReactElement } from "react";
+import { useGetSpecificLocationQuery } from "../../store/services/locations"
 import "../../assets/css/home/App.scss"
-import Paginating from "../../components/home/Paginator";
-import { useGetLocationsQuery } from "../../store/services/locations"
-import Skeleton from '@mui/material/Skeleton';
-import "../../assets/css/home/App.scss"
+import "../../assets/css/location/Location.scss"
 import ButtonComponent from "../../components/location/Button"
 import ImageCardComponent from "../../components/location/Imagecard"
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import usePagination from "../../hooks/usePagination";
+import SkeletonLoader from "../../components/location/CardSkeleton"
+import getUniqueStatuses from "../../utils/uniqueStatuses";
+import Paginating from "../../components/home/Paginator";
+
+const pageSize = 20;
+
 
 const Location: React.FC = (): ReactElement => {
-    let location = useLocation();
-    console.log(location)
+    const [searchParams] = useSearchParams()
+
+    console.log(searchParams.get('id'))
     const {
         data,
         isLoading,
         // isSuccess,
         // isError,
         // error,
-    } = useGetLocationsQuery(1)
-    useEffect(() => { }, [])
+    } = useGetSpecificLocationQuery(searchParams.get('id'))
+
+
+    const paginationOptions = {
+        initialData: data || [],
+        pageSize: pageSize,
+    };
+
+    const {
+        currentPage,
+        totalPages,
+        isLoad,
+        isError,
+        goToPage,
+    } = usePagination<any[]>(paginationOptions);
+    console.log("HBGG", currentPage)
     return <>
         <div className="location-main">
-            <div>
-                <div className="location-text">Filter by Status:</div>
-                <div className="location-buttons">
-                    <ButtonComponent color="success" />
-                    <ButtonComponent color="success" />
-                    <ButtonComponent color="success" />
-                </div>
-            </div>
+            {(isLoad || isLoading) ? <div className=" location-cards">
+                {new Array(pageSize).fill(0).map(() => (
+                    <SkeletonLoader />
+                ))}
+            </div> : <div>
+                <div>
+                    <div className="location-text">Filter by Status:</div>
+                    <div className="location-buttons">
+                        {getUniqueStatuses(data || []).map(e => (<ButtonComponent text={e} />))}
 
-            <div className="location-cards">
-                <ImageCardComponent />
-                <ImageCardComponent />
+                    </div>
+                </div>
+
+                <div className="location-cards">
+                    {currentPage.map((row: any) => (<ImageCardComponent data={row} />))}
+
+                </div></div>}
+            <div className="location-pagination">
+                <Paginating
+                    count={totalPages}
+                    onChangeHandler={(
+                        event: React.ChangeEvent<unknown>,
+                        page: number
+                    ): void => goToPage(page)}
+                />
             </div>
         </div>
 
@@ -41,3 +73,4 @@ const Location: React.FC = (): ReactElement => {
 };
 
 export default Location;
+//Design Location based characters page

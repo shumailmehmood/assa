@@ -4,12 +4,32 @@ import "../../assets/css/location/Location.scss";
 import Button from '@mui/material/Button';
 import { makeStyles } from "@material-ui/core/styles";
 type Props = {
-    color: any
+    text: string
 }
-const ButtonComponent: React.FC<Props> = ({ color = 'primary' }): ReactElement => {
-    console.log(`${color}`)
+const statusCircleColor: any = {
+    Dead: { color: 'error', circle: 'dead-circle' },
+    Alive: { color: 'success', circle: 'alive-circle' },
+    unknown: { color: 'inherit', circle: 'unknown-circle ' }
+}
+const ButtonComponent: React.FC<Props> = ({ text }): ReactElement => {
+    const [activeBtn, setActiveBtn] = React.useState({
+        Dead: {
+            class: 'dead-active',
+            active: false
+        },
+        Alive: {
+            class: 'live-active',
+            active: false
+
+        },
+        unknown: {
+            class: 'unknown-active',
+            active: false
+        }
+    })
+    console.log(statusCircleColor[text].circle)
     return <>
-        <Button variant='outlined' color={color} className="button" ><span className="circle"></span> <span className="button-content">Dead</span></Button>
+        <Button variant='outlined' color={statusCircleColor[text]?.color} className="button" ><span className={statusCircleColor[text]?.circle}></span> <span className={`${'button-content'} ${text === 'unknown' ? 'unknown-button' : ''}`}>{text}</span></Button >
     </>;
 };
 

@@ -1,28 +1,31 @@
 import { ReactElement } from "react";
 import * as React from 'react';
 import "../../assets/css/location/Location.scss";
-import cardimg from "../../assets/css/location/imagecard.jpeg"
 
 type Props = {
-
+    data: any
 }
-const ImageCardComponent: React.FC<Props> = ({ }): ReactElement => {
+const statusCircleColor: any = {
+    Dead: 'dead-circle',
+    Alive: 'alive-circle',
+    unknown: 'unknown-circle'
+}
+const ImageCardComponent: React.FC<Props> = ({ data }): ReactElement => {
     return <>
-        <div className="main-imagecard">
+        <div className="main-imagecard" key={data.id}>
             <div className="image">
-                <img src={cardimg} alt="" />
+                <img src={data.image} alt="Image" />
             </div>
             <div className="imagecard-content">
                 <div className="heading">
-                    MC Haps
+                    {data.name}
                 </div>
                 <div className="dot-text">
-                    <span className="card-circle"></span ><span>Alive - Human</span>
+                    <span className={statusCircleColor[data.status]}></span ><span>{data.status} - {data.species}</span>
                 </div>
             </div>
 
         </div>
-
 
     </>
 }

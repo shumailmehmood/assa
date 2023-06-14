@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
-import axios, { Method, AxiosResponse } from "axios";
-import { ImageCard } from '../../types/types';
+import axios from "axios";
+
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com' }),
     tagTypes: [],
@@ -36,7 +35,7 @@ export const api = createApi({
                 }
                 return {
                     data: {
-                        character: <ImageCard>characterData,
+                        character: characterData,
                         relatedCharacter: [...await Promise.all(relatedCharacter.data.results.map(async (character: any) => {
                             const location: any = await axios.get(character.location.url)
                             if (location.data)

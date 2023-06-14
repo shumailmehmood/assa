@@ -2,7 +2,6 @@ import { ReactElement } from "react";
 import * as React from 'react';
 import "../../assets/css/location/Location.scss";
 import Button from '@mui/material/Button';
-import { Status } from "../../types/types";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({

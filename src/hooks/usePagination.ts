@@ -6,7 +6,7 @@ interface PaginationOptions {
     pageSize: number;
 }
 
-interface PaginationResult<T> {
+interface PaginationResult {
     currentPage: Character[];
     totalPages: number;
     isLoad: boolean;
@@ -14,9 +14,8 @@ interface PaginationResult<T> {
     goToPage: (pageNumber: number) => void;
 }
 
-const usePagination = <T>(options: PaginationOptions): PaginationResult<T> => {
+const usePagination = (options: PaginationOptions): PaginationResult => {
     const { initialData, pageSize } = options;
-    const [data, setData] = useState(initialData);
     const [currentPage, setCurrentPage] = useState<Character[]>([]);
     const [isLoad, setIsLoad] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);

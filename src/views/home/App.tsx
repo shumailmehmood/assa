@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import Card from "../../components/home/Card";
 import "../../assets/css/home/App.scss";
-import Paginating from "../../components/home/Paginator";
+import Paginating from "../../components/Paginator";
 import { useGetLocationsQuery } from "../../store/services/locations";
 import Skeleton from "@mui/material/Skeleton";
 import { useNavigate } from 'react-router-dom'
@@ -31,8 +31,8 @@ const Home: React.FC = (): ReactElement => {
   if (isLoading) {
     return (
       <div className="card-section">
-        {new Array(20).fill(0).map(() => (
-          <Skeleton variant="rectangular" width={420} height={130} />
+        {new Array(20).fill(0).map((e, i) => (
+          <Skeleton key={i} variant="rectangular" width={420} height={130} />
         ))}
       </div>
     );

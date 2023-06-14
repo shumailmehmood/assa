@@ -1,7 +1,6 @@
 import { ReactElement } from "react";
 import "../../assets/css/detail/Detail.scss";
 import * as React from 'react'
-import cardimg from "../../assets/css/location/imagecard.jpeg"
 
 type Props = {
     data: any

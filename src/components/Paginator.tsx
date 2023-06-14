@@ -1,9 +1,6 @@
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { text } from 'stream/consumers';
-import { fontWeight } from '@mui/system';
-import { string } from 'yargs';
 
 type Props = {
     count: number,

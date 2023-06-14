@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import * as React from 'react';
-import "../../assets/css/location/Location.scss";
-import { ImageCard } from "../../types/types";
+import "../assets/css/location/Location.scss";
+import { ImageCard } from "../types/types";
 import { useNavigate } from "react-router-dom"
 
 type Props = {
@@ -21,11 +21,11 @@ const ImageCardComponent: React.FC<Props> = ({ data }): ReactElement => {
     return <>
         <div className="main-imagecard" key={data.id}  >
             <div className="image">
-                <img src={data.image} alt="Image" />
+                <img src={data.image} alt={data.name} />
             </div>
             <div className="imagecard-content">
-                <div className="heading" onClick={navigatePage}>
-                    {data.name}
+                <div className="heading" >
+                    <span onClick={navigatePage}> {data.name}</span>
                 </div>
                 <div className="dot-text">
 

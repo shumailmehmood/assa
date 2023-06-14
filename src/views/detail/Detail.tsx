@@ -1,15 +1,12 @@
 import React, { ReactElement } from "react";
 import "../../assets/css/detail/Detail.scss"
 import DetailCard from "../../components/detail/Detailcard";
-import ImageCardComponent from "../../components/location/Imagecard";
-import { Character, ImageCard } from "../../types/types";
-import { useLocation, useSearchParams } from "react-router-dom";
+import ImageCardComponent from "../../components/Imagecard";
+import { ImageCard } from "../../types/types";
+import { useSearchParams } from "react-router-dom";
 import { useGetCharacterQuery } from "../../store/services/locations";
-import paramExtractor from "../../utils/paramExtractor"
-
 
 const Detail: React.FC = (): ReactElement => {
-    const locate = useLocation()
     const [searchParams] = useSearchParams()
     const {
         data,

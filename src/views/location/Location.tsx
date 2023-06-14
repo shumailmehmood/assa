@@ -3,12 +3,12 @@ import { useGetSpecificLocationQuery } from "../../store/services/locations"
 import "../../assets/css/home/App.scss"
 import "../../assets/css/location/Location.scss"
 import ButtonComponent from "../../components/location/Button"
-import ImageCardComponent from "../../components/location/Imagecard"
+import ImageCardComponent from "../../components/Imagecard"
 import { useSearchParams } from "react-router-dom";
 import usePagination from "../../hooks/usePagination";
 import SkeletonLoader from "../../components/location/CardSkeleton"
 import getUniqueStatuses from "../../utils/uniqueStatuses";
-import Paginating from "../../components/home/Paginator";
+import Paginating from "../../components/Paginator";
 import useStatusFilter from "../../hooks/useFilter";
 import { Character, ImageCard } from "../../types/types";
 const pageSize = 20;
@@ -40,14 +40,14 @@ const LocationContainer: React.FC = (): ReactElement => {
     } = useGetSpecificLocationQuery(searchParams.get('id'))
 
     //call the filter hook
-    const filteredData = [] = useStatusFilter(data, filter);
+    const filteredData = useStatusFilter(data, filter);
     //call for the pagination
     const {
         currentPage,
         totalPages,
         isLoad,
         goToPage,
-    } = usePagination<Character[]>({
+    } = usePagination({
         initialData: filteredData,
         pageSize: pageSize,
     });

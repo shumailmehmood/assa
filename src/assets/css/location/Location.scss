@@ -122,44 +122,70 @@
         height: auto;
         display: flex;
         align-items: center;
-        gap: 0px 10px;
+        justify-content: space-between;
+        // gap: 0px 10px;
 
-        .alive-circle {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background: #98CD4D;
-            border-radius: 50%;
-            margin-right: 10px;
+        .right-text {
+            span {
+                font-family: 'Poppins';
+                font-style: italic;
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 22px;
+                color: #818181;
+            }
         }
 
-        .dead-circle {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background: #B90000;
-            border-radius: 50%;
-            margin-right: 10px;
+        .left-text {
+            .alive-circle {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                background: #98CD4D;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            .dead-circle {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                background: #B90000;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            .unknown-circle {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                background: #B8B8B8;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            span {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 22px;
+                color: #44281D;
+            }
         }
 
-        .unknown-circle {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background: #B8B8B8;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+    }
+
+    .dimension {
+        margin-top: 10px;
 
         span {
             font-family: 'Poppins';
             font-style: normal;
-            font-weight: 500;
+            font-weight: 400;
             font-size: 16px;
             line-height: 22px;
-            color: #44281D;
         }
-
     }
 
 }

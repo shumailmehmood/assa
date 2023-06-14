@@ -1,7 +1,6 @@
 import { ReactElement } from "react";
 import * as React from 'react';
 import "../../assets/css/location/Location.scss";
-
 type Props = {
     data: any
 }
@@ -21,12 +20,23 @@ const ImageCardComponent: React.FC<Props> = ({ data }): ReactElement => {
                     {data.name}
                 </div>
                 <div className="dot-text">
-                    <span className={statusCircleColor[data.status]}></span ><span>{data.status} - {data.species}</span>
+
+                    <div className="left-text">
+                        <span className={statusCircleColor[data.status]}></span ><span>{data.status} - {data.species}</span>
+                    </div>
+                    <div className="right-text">
+                        <span>
+                            narian - male
+                        </span>
+                    </div>
+
                 </div>
+                <div className="dimension">
+                    <span>Narnia Dimension</span>
+                </div>
+
             </div>
-
         </div>
-
     </>
 }
 export default ImageCardComponent;

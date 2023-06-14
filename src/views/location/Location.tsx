@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { useGetSpecificLocationQuery } from "../../store/services/locations"
 import "../../assets/css/home/App.scss"
 import "../../assets/css/location/Location.scss"
@@ -9,53 +9,91 @@ import usePagination from "../../hooks/usePagination";
 import SkeletonLoader from "../../components/location/CardSkeleton"
 import getUniqueStatuses from "../../utils/uniqueStatuses";
 import Paginating from "../../components/home/Paginator";
-
+import useStatusFilter from "../../hooks/useFilter";
+import { Character, ImageCard } from "../../types/types";
 const pageSize = 20;
 
 
-const Location: React.FC = (): ReactElement => {
+const LocationContainer: React.FC = (): ReactElement => {
     const [searchParams] = useSearchParams()
+    const [filter, setFilter] = useState('')
+    const [activeBtn, setActiveBtn] = React.useState<any>({
+        Dead: {
+            class: 'dead-active',
+            active: false
+        },
+        Alive: {
+            class: 'live-active',
+            active: false
 
-    console.log(searchParams.get('id'))
+        },
+        unknown: {
+            class: 'unknown-active',
+            active: false
+        }
+    })
+
+    //call the endpoint
     const {
-        data,
+        data = [],
         isLoading,
-        // isSuccess,
-        // isError,
-        // error,
     } = useGetSpecificLocationQuery(searchParams.get('id'))
 
-
-    const paginationOptions = {
-        initialData: data || [],
-        pageSize: pageSize,
-    };
-
+    //call the filter hook
+    const filteredData = [] = useStatusFilter(data, filter);
+    //call for the pagination
     const {
         currentPage,
         totalPages,
         isLoad,
-        isError,
         goToPage,
-    } = usePagination<any[]>(paginationOptions);
-    console.log("HBGG", currentPage)
+    } = usePagination<Character[]>({
+        initialData: filteredData,
+        pageSize: pageSize,
+    });
+    //onFilter Change
+    const onFilterChange = (filter: string): void => {
+        setFilter(filter)
+        let status = activeBtn;
+        const updatedStatus: any = {
+            Dead: { ...status.Dead, active: false },
+            Alive: { ...status.Alive, active: false },
+            unknown: { ...status.unknown, active: false }
+        };
+        updatedStatus[filter].active = true;
+        setActiveBtn(updatedStatus)
+    }
+    const makeDataFormat = (data: Character[]): ImageCard[] => {
+        return data.map(e => ({
+            id: e.id,
+            image: e.image,
+            name: e.name,
+            status: e.status,
+            species: e.status,
+            gender: '',
+            dimension: '',
+            type: '',
+            location_url: e.location.url
+
+        }))
+    }
     return <>
         <div className="location-main">
             {(isLoad || isLoading) ? <div className=" location-cards">
-                {new Array(pageSize).fill(0).map(() => (
-                    <SkeletonLoader />
+                {new Array(pageSize).fill(0).map((e, i) => (
+                    <SkeletonLoader key={i} />
                 ))}
             </div> : <div>
                 <div>
                     <div className="location-text">Filter by Status:</div>
                     <div className="location-buttons">
-                        {getUniqueStatuses(data || []).map(e => (<ButtonComponent text={e} />))}
+                        {getUniqueStatuses(data)?.map(e => (<ButtonComponent variant={activeBtn[e]} text={e} onFilterChangeHandler={onFilterChange} key={e} />))}
 
                     </div>
                 </div>
 
                 <div className="location-cards">
-                    {currentPage.map((row: any) => (<ImageCardComponent data={row} />))}
+                    {makeDataFormat(currentPage).map((row: ImageCard) => (<ImageCardComponent data={row} key={row.id} />))}
 
                 </div></div>}
             <div className="location-pagination">
@@ -72,5 +110,5 @@ const Location: React.FC = (): ReactElement => {
     </>;
 };
 
-export default Location;
+export default LocationContainer;
 //Design Location based characters page

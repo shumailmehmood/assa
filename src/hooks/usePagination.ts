@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-
+import { Character } from '../types/types';
 
 interface PaginationOptions {
-    initialData: any[];
+    initialData: Character[];
     pageSize: number;
 }
 
 interface PaginationResult<T> {
-    currentPage: T[];
+    currentPage: Character[];
     totalPages: number;
     isLoad: boolean;
     isError: boolean;
@@ -17,7 +17,7 @@ interface PaginationResult<T> {
 const usePagination = <T>(options: PaginationOptions): PaginationResult<T> => {
     const { initialData, pageSize } = options;
     const [data, setData] = useState(initialData);
-    const [currentPage, setCurrentPage] = useState<T[]>([]);
+    const [currentPage, setCurrentPage] = useState<Character[]>([]);
     const [isLoad, setIsLoad] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
     const [currentPageNumber, setCurrentPageNumber] = useState<number>(1);
@@ -25,7 +25,7 @@ const usePagination = <T>(options: PaginationOptions): PaginationResult<T> => {
 
 
     const goToPage = (pageNumber: number) => {
-        console.log("HBG", pageNumber)
+
         if (pageNumber >= 1 && pageNumber <= totalPages) {
             setCurrentPageNumber(pageNumber);
         }
@@ -41,7 +41,6 @@ const usePagination = <T>(options: PaginationOptions): PaginationResult<T> => {
         setCurrentPage(pageData);
         setIsLoad(false);
     }, [currentPageNumber, initialData, pageSize]);
-    console.log("HBGGG", currentPageNumber)
     return {
         currentPage,
         totalPages,

@@ -14,7 +14,6 @@ const Paginating: React.FC<Props> = ({ count, onChangeHandler }): React.ReactEle
         margin: "30px",
         fontWeight: "bold",
     }
-    console.log(count)
     return (
         <Stack spacing={2}>
             <Pagination count={count} onChange={onChangeHandler} style={margin} />

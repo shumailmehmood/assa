@@ -1,34 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Character } from '../types/types';
 
-interface Character {
-    id: number;
-    name: string;
-    status: string;
-    species: string;
-    type: string;
-    gender: string;
-    origin: {
-        name: string;
-        url: string;
-    };
-    location: {
-        name: string;
-        url: string;
-    };
-    image: string;
-    episode: string[];
-    url: string;
-    created: string;
-}
+const useFilteredData = (data: Character[], filter: string): Character[] => {
 
-const useStatusFilter = (data: Character[]): [Character[], (status: string) => void] => {
-    const [filteredData, setFilteredData] = useState<Character[]>(data);
 
-    const filterByStatus = (status: string) => {
-        const filteredCharacters = data.filter((character) => character.status === status);
+    const [filteredData, setFilteredData] = useState<Character[]>([]);
+
+    useEffect(() => {
+        if (!filter)
+            return setFilteredData(data);
+        const filteredCharacters = data.filter(
+            (character) => character.status.toLowerCase() === filter.toLowerCase()
+        );
         setFilteredData(filteredCharacters);
-    };
-
-    return [filteredData, filterByStatus];
+    }, [data, filter]);
+    return filteredData;
 };
-export default useStatusFilter;
+
+export default useFilteredData;

@@ -31,9 +31,11 @@ const Home: React.FC = (): ReactElement => {
   if (isLoading) {
     return (
       <div className="card-section">
-        {new Array(20).fill(0).map((e, i) => (
-          <Skeleton key={i} variant="rectangular" width={420} height={130} />
-        ))}
+        <div className="cards">
+          {new Array(20).fill(0).map((e, i) => (
+            <Skeleton key={i} variant="rectangular" width={420} height={130} />
+          ))}
+        </div>
       </div>
     );
   }

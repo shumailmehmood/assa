@@ -13,7 +13,6 @@ import { useLocation } from 'react-router-dom';
 const NavBar: React.FC = (): ReactElement => {
     const location = useLocation();
     const isHomeRoute = location.pathname === '/';
-
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar className="nav-border" position="static" color="transparent" elevation={0}  >

@@ -10,9 +10,9 @@ const Detail = lazy(() => import("../views/detail/Detail"));
 
 const IndexRouter: React.FC = (): ReactElement => {
   return (
-    <Layout>
-      <BrowserRouter>
 
+    <BrowserRouter>
+      <Layout>
         <Suspense fallback={<LinearProgress />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -20,9 +20,9 @@ const IndexRouter: React.FC = (): ReactElement => {
             <Route path="/detail" element={<Detail />} />
           </Routes>
         </Suspense>
+      </Layout>
+    </BrowserRouter>
 
-      </BrowserRouter>
-    </Layout>
   );
 };
 

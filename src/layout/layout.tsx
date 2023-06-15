@@ -8,11 +8,15 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ children }): ReactElement => {
 
-    // console.log('Layout', location, isHomeRoute)
+    // console.log('Layout', location, isHomeRoute
+    const responsive = {
+        width: "100%",
+        'overflow-x': "hidden"
+    }
     return (
         <>
             <NavBar />
-            <main>{children}</main>
+            <main style={responsive}  >{children}</main>
         </>
     );
 };

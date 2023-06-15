@@ -13,7 +13,7 @@ const Paginating: React.FC<Props> = ({ count, onChangeHandler }): React.ReactEle
     }
     return (
         <Stack spacing={2}>
-            <Pagination count={count} onChange={onChangeHandler} style={margin} />
+            <Pagination count={count} size="small" onChange={onChangeHandler} style={margin} />
         </Stack>
     );
 }

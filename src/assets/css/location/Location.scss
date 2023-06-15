@@ -3,12 +3,20 @@
 
 // main component location is desisgnng here
 .location-main {
-    padding-left: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .location-content {
+        width: 95%;
+        margin: auto
+    }
 
     .location-cards {
         display: flex;
         flex-wrap: wrap;
         gap: 25px;
+        justify-content: center;
     }
 
     .location-buttons {
@@ -32,7 +40,6 @@
     margin-bottom: 10px;
     color: #44281D;
 }
-
 
 .button {
     width: 120px;
@@ -102,7 +109,7 @@
     margin-top: 10px;
 
     .image {
-        width: 345px;
+        width: 340px;
         height: 345px;
 
         img {
@@ -215,8 +222,7 @@
 }
 
 // responsive design is here
-@media only screen and (min-width: 300px) and (max-width: 400px) {
-
+@media only screen and (min-width: 300px) and (max-width: 723px) {
     .location-main {
         padding-left: 0%;
         width: 100%;

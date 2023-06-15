@@ -33,7 +33,6 @@ const Detail: React.FC = (): ReactElement => {
             <div className="detail-left-card" >
                 <ImageCardComponent data={data?.character || makeDefaultFormat()} />
             </div>
-
             <div className="detail-right-content">
                 <div className="heading">Other Characters</div>
                 <div className="detail-cards">

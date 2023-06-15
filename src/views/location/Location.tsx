@@ -83,7 +83,7 @@ const LocationContainer: React.FC = (): ReactElement => {
                 {new Array(pageSize).fill(0).map((e, i) => (
                     <SkeletonLoader key={i} />
                 ))}
-            </div> : <div>
+            </div> : <div className="location-content">
                 <div>
                     <div className="location-text">Filter by Status:</div>
                     <div className="location-buttons">

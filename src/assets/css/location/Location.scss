@@ -16,7 +16,6 @@
         display: flex;
         flex-wrap: wrap;
         gap: 25px;
-        justify-content: center;
     }
 
     .location-buttons {
@@ -230,6 +229,11 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        .location-content {
+            width: 100%;
+            margin: auto
+        }
 
         .location-cards {
             width: 100%;

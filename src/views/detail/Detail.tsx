@@ -30,7 +30,7 @@ const Detail: React.FC = (): ReactElement => {
     }
     return <>
         <div className="Detail-main" >
-            <div className="detail-left-card" >
+            <div className="detail-left-card s" >
                 <ImageCardComponent data={data?.character || makeDefaultFormat()} />
             </div>
             <div className="detail-right-content">
@@ -40,7 +40,6 @@ const Detail: React.FC = (): ReactElement => {
 
                 </div>
             </div>
-
         </div>
 
     </>;
